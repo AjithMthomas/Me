@@ -252,10 +252,10 @@ export default function TalkingAvatar({
 
       {/* Character Visual Element: Supports Video or High-res Transparent Character */}
       <div
+        className="talking-avatar-figure"
         style={{
           position: "relative",
           width: "100%",
-          height: "clamp(460px, 75vh, 760px)",
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "center",
@@ -391,12 +391,8 @@ export default function TalkingAvatar({
       {/* Floating Subtitles & Audio Controller Bar when active */}
       {isPlaying && (
         <div
+          className="talking-avatar-speech-bubble"
           style={{
-            position: "absolute",
-            bottom: "2.5rem",
-            left: "-14%",
-            width: "370px",
-            maxWidth: "92vw",
             backgroundColor: "rgba(255, 255, 255, 0.96)",
             backdropFilter: "blur(16px)",
             border: "1px solid #E5E1D7",

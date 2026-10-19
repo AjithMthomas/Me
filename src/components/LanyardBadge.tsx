@@ -301,13 +301,13 @@ export default function LanyardBadge() {
               }}
             >
               <img
-                src="/assets/ajith-badge-portrait.png"
+                src="/assets/ajith-badge-portrait.png?v=3"
                 alt="Ajith M T - Developer ID Portrait"
                 style={{
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  objectPosition: "center 15%",
+                  objectPosition: "center center",
                 }}
               />
             </div>

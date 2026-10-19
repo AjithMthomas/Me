@@ -39,74 +39,30 @@ export default function Hero({
   return (
     <section
       id="hero"
+      className="hero-section"
       onMouseMove={handleMouseMove}
-      style={{
-        position: "relative",
-        width: "100%",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        backgroundColor: "var(--canvas-bg)",
-        overflow: "hidden",
-        padding: "5.5rem clamp(2.5rem, 4vw, 4.5rem) 0 clamp(2.5rem, 4vw, 4.5rem)",
-        boxSizing: "border-box",
-      }}
     >
       {/* 1. OVERSIZED BACKGROUND TYPOGRAPHY: AJITH */}
       <div
         aria-hidden="true"
+        className="hero-bg-typography"
         style={{
-          position: "absolute",
-          top: "8%",
-          left: "50%",
           transform: `translate(-50%, 0) translate3d(${mousePos.x * -16}px, ${mousePos.y * -10}px, 0)`,
-          width: "100%",
-          maxWidth: "1650px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          pointerEvents: "none",
-          userSelect: "none",
-          zIndex: 1,
-          transition: "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
-        <span
-          style={{
-            fontSize: "clamp(8rem, 20vw, 24rem)",
-            fontWeight: 800,
-            lineHeight: 0.85,
-            letterSpacing: "0.08em",
-            color: "var(--bg-big-text)",
-            textAlign: "center",
-            display: "block",
-            whiteSpace: "nowrap",
-            fontFamily: "var(--font-sans)",
-          }}
-        >
-          AJITH
-        </span>
+        <span>AJITH</span>
       </div>
 
-      {/* 2. HORIZONTALLY CENTERED FULL-BODY TALKING AVATAR */}
+      {/* 2. TALKING AVATAR (Centered on Desktop, Adaptive Flow on Mobile) */}
       <div
+        className="hero-avatar-wrapper"
         style={{
-          position: "absolute",
-          left: "50%",
-          bottom: 0,
-          transform: `translateX(-50%) translate3d(${mousePos.x * 10}px, ${mousePos.y * 6}px, 0)`,
-          height: "100%",
-          maxHeight: "82vh",
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "center",
-          zIndex: 25,
-          transition: "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
-          pointerEvents: "none",
+          transform: typeof window !== "undefined" && window.innerWidth > 1024
+            ? `translateX(-50%) translate3d(${mousePos.x * 10}px, ${mousePos.y * 6}px, 0)`
+            : undefined,
         }}
       >
-        <div style={{ pointerEvents: "auto", height: "100%", display: "flex", alignItems: "flex-end" }}>
+        <div style={{ pointerEvents: "auto", height: "100%", width: "100%", display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
           <TalkingAvatar
             isPlaying={isPlaying}
             onTogglePlay={onToggleSpeech}
@@ -116,36 +72,20 @@ export default function Hero({
       </div>
 
       {/* Spacer for navigation */}
-      <div style={{ height: "1.5rem" }} />
+      <div className="hero-nav-spacer" style={{ height: "1rem" }} />
 
-      {/* 3. HERO CONTENT: Headline on lower-left, Action buttons on lower-right, restored to natural spacing with border padding */}
-      <div
-        style={{
-          position: "relative",
-          zIndex: 15,
-          width: "100%",
-          flex: 1,
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "space-between",
-          paddingBottom: "clamp(2.5rem, 4vh, 3.5rem)",
-          boxSizing: "border-box",
-        }}
-      >
+      {/* 3. HERO CONTENT: Headline on left, Action buttons on right (Stacks cleanly on Mobile) */}
+      <div className="hero-content-container">
         {/* LOWER-LEFT CONTENT: Headline, Title & Subtitle */}
-        <div
-          style={{
-            maxWidth: "440px",
-            pointerEvents: "auto",
-          }}
-        >
+        <div className="hero-headline-column">
           {/* Small uppercase label */}
           <div
+            className="hero-tag-badge"
             style={{
               display: "flex",
               alignItems: "center",
               gap: "0.6rem",
-              marginBottom: "0.9rem",
+              marginBottom: "0.8rem",
             }}
           >
             <span
@@ -164,12 +104,12 @@ export default function Hero({
           {/* Main Headline: Bold Two-Line Composition with dot */}
           <h1
             style={{
-              fontSize: "clamp(3.1rem, 5.2vw, 5rem)",
+              fontSize: "clamp(2.4rem, 5.2vw, 5rem)",
               fontWeight: 800,
               lineHeight: 1.02,
               letterSpacing: "-0.038em",
               color: "var(--text-headline)",
-              marginBottom: "1.1rem",
+              marginBottom: "1rem",
             }}
           >
             Full Stack
@@ -180,7 +120,7 @@ export default function Hero({
           {/* Supporting description */}
           <p
             style={{
-              fontSize: "clamp(0.95rem, 1.2vw, 1.08rem)",
+              fontSize: "clamp(0.92rem, 1.2vw, 1.08rem)",
               fontWeight: 400,
               color: "var(--text-muted)",
               lineHeight: 1.55,
@@ -191,20 +131,13 @@ export default function Hero({
           </p>
         </div>
 
-        {/* LOWER-RIGHT FLOATING ACTION BUTTONS (Aligned inward) */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-end",
-            gap: "0.75rem",
-            pointerEvents: "auto",
-          }}
-        >
+        {/* FLOATING ACTION BUTTONS */}
+        <div className="hero-actions-column">
           {/* Primary Dark Pill Button: Explore work */}
           <a
             href="#projects"
             onClick={(e) => handleScrollToSection(e, "projects")}
+            className="hero-explore-btn"
             style={{
               backgroundColor: "var(--btn-dark)",
               color: "#FFFFFF",
@@ -236,10 +169,12 @@ export default function Hero({
 
           {/* Secondary Actions: Let's talk & Resume buttons */}
           <div
+            className="hero-secondary-btns"
             style={{
               display: "flex",
               alignItems: "center",
               gap: "0.6rem",
+              flexWrap: "wrap",
             }}
           >
             {/* Let's talk */}
