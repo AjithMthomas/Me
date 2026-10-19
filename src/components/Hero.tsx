@@ -92,7 +92,7 @@ export default function Hero({
               style={{
                 fontSize: "0.82rem",
                 fontWeight: 600,
-                letterSpacing: "0.22em",
+                letterSpacing: "0.28em",
                 textTransform: "uppercase",
                 color: "var(--text-muted)",
               }}

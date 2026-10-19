@@ -185,9 +185,9 @@ button {
 
 .hero-bg-typography span {
   font-size: clamp(6.5rem, 18vw, 24rem);
-  fontWeight: 800;
+  font-weight: 800;
   line-height: 0.85;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   color: var(--bg-big-text);
   text-align: center;
   display: block;
@@ -318,6 +318,7 @@ button {
 
   .hero-bg-typography span {
     font-size: clamp(3.8rem, 20vw, 7.5rem) !important;
+    letter-spacing: 0.14em !important;
     opacity: 0.65;
   }
 
