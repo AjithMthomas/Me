@@ -9,6 +9,15 @@ interface TalkingAvatarProps {
   onReset: () => void;
 }
 
+const SCRIPT_SENTENCES = [
+  "Hi, I'm Ajith.",
+  "I'm a creative full stack developer with over 2 years of professional and 4 years of overall engineering experience.",
+  "I architect high-performance web applications, scalable APIs, and robust fintech systems using Angular, React, Next.js, Node.js, and Python.",
+  "Feel free to explore my projects below, download my resume, or get in touch to collaborate!",
+];
+
+const FULL_SCRIPT = SCRIPT_SENTENCES.join(" ");
+
 export default function TalkingAvatar({
   isPlaying,
   onTogglePlay,
@@ -22,23 +31,15 @@ export default function TalkingAvatar({
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const progressTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const scriptSentences = [
-    "Hi, I'm Ajith.",
-    "I'm a creative full stack developer with over 2 years of professional and 4 years of overall engineering experience.",
-    "I architect high-performance web applications, scalable APIs, and robust fintech systems using Angular, React, Next.js, Node.js, and Python.",
-    "Feel free to explore my projects below, download my resume, or get in touch to collaborate!",
-  ];
-
-  const fullScript = scriptSentences.join(" ");
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const scriptSentences = SCRIPT_SENTENCES;
 
   // Speech synthesis fallback handler if audio file cannot play
-  const playSpeechSynthesis = useCallback(() => {
+  const startSpeechSynthesis = useCallback(() => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
     window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(fullScript);
+    const utterance = new SpeechSynthesisUtterance(FULL_SCRIPT);
     utterance.rate = 0.98;
     utterance.pitch = 0.92; // Natural, deep mens pitch
 
@@ -65,10 +66,11 @@ export default function TalkingAvatar({
     utterance.onboundary = (event) => {
       const charIndex = event.charIndex;
       let cumulative = 0;
-      for (let i = 0; i < scriptSentences.length; i++) {
-        cumulative += scriptSentences[i].length + 1;
+      for (let i = 0; i < SCRIPT_SENTENCES.length; i++) {
+        cumulative += SCRIPT_SENTENCES[i].length + 1;
         if (charIndex < cumulative) {
           setCurrentSentenceIndex(i);
+          setSpeakingProgress(Math.min(((i + 0.5) / SCRIPT_SENTENCES.length) * 100, 100));
           break;
         }
       }
@@ -80,12 +82,20 @@ export default function TalkingAvatar({
       setSpeakingProgress(0);
     };
 
+    utterance.onerror = () => {
+      onReset();
+      setCurrentSentenceIndex(0);
+      setSpeakingProgress(0);
+    };
+
+    utteranceRef.current = utterance;
+
     if (!isMuted) {
       window.speechSynthesis.speak(utterance);
     }
-  }, [fullScript, isMuted, onReset, scriptSentences]);
+  }, [isMuted, onReset]);
 
-  // Audio & speech sync control
+  // Audio & speech sync control - strictly triggers only when isPlaying state changes!
   useEffect(() => {
     const audio = audioRef.current;
 
@@ -93,38 +103,48 @@ export default function TalkingAvatar({
       if (audio && !useSpeechSynthesisFallback) {
         audio.currentTime = 0;
         audio.muted = isMuted;
-        audio.play().catch((err) => {
-          console.warn("Audio playback error, falling back to speech synthesis:", err);
-          setUseSpeechSynthesisFallback(true);
-          playSpeechSynthesis();
-        });
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((err) => {
+            console.warn("Audio playback error, falling back to speech synthesis:", err);
+            setUseSpeechSynthesisFallback(true);
+            startSpeechSynthesis();
+          });
+        }
       } else {
-        playSpeechSynthesis();
+        startSpeechSynthesis();
       }
     } else {
-      if (audio) {
+      if (audio && !audio.paused) {
         audio.pause();
       }
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         window.speechSynthesis.cancel();
-      }
-      if (progressTimerRef.current) {
-        clearInterval(progressTimerRef.current);
       }
     }
+  }, [isPlaying]);
 
+  // Synchronize mute state without disrupting ongoing playback
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.muted = isMuted;
+    }
+    if (isMuted && typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+  }, [isMuted]);
+
+  // Clean up audio on unmount
+  useEffect(() => {
     return () => {
-      if (audio) {
-        audio.pause();
+      if (audioRef.current) {
+        audioRef.current.pause();
       }
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         window.speechSynthesis.cancel();
       }
-      if (progressTimerRef.current) {
-        clearInterval(progressTimerRef.current);
-      }
     };
-  }, [isPlaying, isMuted, playSpeechSynthesis, useSpeechSynthesisFallback]);
+  }, []);
 
   // Handle HTML5 audio time update
   const handleTimeUpdate = () => {
@@ -136,12 +156,13 @@ export default function TalkingAvatar({
     const progress = Math.min((currentTime / duration) * 100, 100);
     setSpeakingProgress(progress);
 
-    // Sentence timestamp thresholds
-    if (currentTime < 2.4) {
+    // Dynamic thresholds based on the full 26.5-second spoken intro:
+    const ratio = currentTime / duration;
+    if (ratio < 0.10) {
       setCurrentSentenceIndex(0);
-    } else if (currentTime < 8.5) {
+    } else if (ratio < 0.38) {
       setCurrentSentenceIndex(1);
-    } else if (currentTime < 15.2) {
+    } else if (ratio < 0.73) {
       setCurrentSentenceIndex(2);
     } else {
       setCurrentSentenceIndex(3);
@@ -157,7 +178,7 @@ export default function TalkingAvatar({
   const handleAudioError = () => {
     setUseSpeechSynthesisFallback(true);
     if (isPlaying) {
-      playSpeechSynthesis();
+      startSpeechSynthesis();
     }
   };
 
@@ -174,7 +195,7 @@ export default function TalkingAvatar({
       }
       setSpeakingProgress(0);
       setCurrentSentenceIndex(0);
-      playSpeechSynthesis();
+      startSpeechSynthesis();
     }
   };
 
@@ -188,7 +209,7 @@ export default function TalkingAvatar({
       if (newMuted) {
         window.speechSynthesis.cancel();
       } else if (isPlaying) {
-        playSpeechSynthesis();
+        startSpeechSynthesis();
       }
     }
   };
@@ -222,7 +243,7 @@ export default function TalkingAvatar({
       {/* Hidden audio element with genuine recorded human male voice */}
       <audio
         ref={audioRef}
-        src="/assets/ajith-intro.mp3"
+        src="/assets/ajith-intro.mp3?v=4"
         preload="auto"
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleAudioEnded}
