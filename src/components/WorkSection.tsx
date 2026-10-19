@@ -1,12 +1,25 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUpRight, ChevronDown, ChevronUp, ExternalLink, Code2, ShieldAlert, Sparkles } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronDown,
+  ChevronUp,
+  ExternalLink,
+  Code2,
+  ShieldAlert,
+  Sparkles,
+  Layers,
+  Terminal,
+  Activity,
+  CheckCircle2,
+  Globe,
+} from "lucide-react";
 import { GithubIcon } from "./Icons";
 
 export default function WorkSection() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
-  const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const [expandedProject, setExpandedProject] = useState<string | null>("wayzon");
 
   const filterTabs = [
     { id: "all", label: "All Projects", count: 5 },
@@ -33,6 +46,8 @@ export default function WorkSection() {
       tech: ["Angular", "Django", "Python", "PostgreSQL", "REST Framework", "Git"],
       github: "https://github.com/AjithMthomas",
       featured: true,
+      color: "#DD0031",
+      slug: "wayzon.edu-platform",
     },
     {
       id: "foodcod",
@@ -51,6 +66,8 @@ export default function WorkSection() {
       tech: ["Angular", "Django", "Node.js", "PWA", "WebSockets", "MySQL"],
       github: "https://github.com/AjithMthomas",
       featured: true,
+      color: "#059669",
+      slug: "foodcod.pwa-dispatch",
     },
     {
       id: "checkwriter",
@@ -69,6 +86,8 @@ export default function WorkSection() {
       tech: ["React.js", "NextJS", "TypeScript", "OAuth2 JWT", "ChartJS", "Fintech APIs"],
       github: "https://github.com/AjithMthomas",
       featured: true,
+      color: "#2563EB",
+      slug: "onlinecheckwriter.fintech",
     },
     {
       id: "frauddetection",
@@ -87,10 +106,12 @@ export default function WorkSection() {
       tech: ["Python", "FastAPI", "Machine Learning", "Docker", "Kubernetes", "Redis"],
       github: "https://github.com/AjithMthomas",
       featured: false,
+      color: "#7C3AED",
+      slug: "fraud-ml.risk-engine",
     },
     {
       id: "freelance",
-      title: "Enterprise Solutions & Client Projects",
+      title: "Enterprise Solutions & Corporate Apps",
       category: "fullstack",
       categoryLabel: "Custom Web Solutions",
       tagline: "Scalable Full Stack Architectures for Diverse Industries",
@@ -104,6 +125,8 @@ export default function WorkSection() {
       tech: ["Full Stack", "Node.js", "React.js", "AWS EC2/S3", "Docker", "PostgreSQL"],
       github: "https://github.com/AjithMthomas",
       featured: false,
+      color: "#D97706",
+      slug: "enterprise.client-apps",
     },
   ];
 
@@ -120,7 +143,7 @@ export default function WorkSection() {
     <section
       id="projects"
       style={{
-        padding: "7rem clamp(2rem, 4.5vw, 4.5rem)",
+        padding: "7.5rem clamp(2rem, 4.5vw, 4.5rem)",
         backgroundColor: "var(--canvas-bg)",
         borderTop: "1px solid var(--canvas-border)",
         position: "relative",
@@ -136,23 +159,31 @@ export default function WorkSection() {
             alignItems: "flex-end",
             flexWrap: "wrap",
             gap: "2rem",
-            marginBottom: "3.5rem",
+            marginBottom: "3.2rem",
           }}
         >
           <div>
-            <span
-              style={{
-                fontSize: "0.82rem",
-                fontWeight: 700,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: "var(--text-muted)",
-                display: "block",
-                marginBottom: "0.8rem",
-              }}
-            >
-              04 —— FEATURED WORK
-            </span>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.8rem" }}>
+              <span
+                style={{
+                  fontSize: "0.8rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: "var(--text-muted)",
+                }}
+              >
+                04 —— SELECTED WORKS
+              </span>
+              <span
+                style={{
+                  width: "6px",
+                  height: "6px",
+                  borderRadius: "50%",
+                  backgroundColor: "#2563EB",
+                }}
+              />
+            </div>
             <h2
               style={{
                 fontSize: "clamp(2.4rem, 4vw, 3.8rem)",
@@ -160,23 +191,25 @@ export default function WorkSection() {
                 color: "var(--text-headline)",
                 lineHeight: 1.12,
                 letterSpacing: "-0.03em",
+                margin: 0,
               }}
             >
-              Highlighted Projects
+              Featured Engineering Projects
             </h2>
             <p
               style={{
                 fontSize: "1.05rem",
                 color: "var(--text-muted)",
                 marginTop: "0.8rem",
-                maxWidth: "600px",
+                maxWidth: "620px",
+                lineHeight: 1.5,
               }}
             >
-              Real-world systems spanning banking platforms for 1M+ users, high-concurrency restaurant PWAs, and ML fraud prevention.
+              Real-world commercial platforms ranging from fintech systems with 1M+ active users to real-time PWAs and automated pipelines.
             </p>
           </div>
 
-          {/* Interactive Filter Pills */}
+          {/* Filter Pills */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem" }}>
             {filterTabs.map((tab) => {
               const isActive = activeFilter === tab.id;
@@ -184,31 +217,46 @@ export default function WorkSection() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveFilter(tab.id)}
+                  className="pill-chip"
                   style={{
                     padding: "0.55rem 1.15rem",
                     borderRadius: "9999px",
-                    fontSize: "0.84rem",
+                    fontSize: "0.85rem",
                     fontWeight: isActive ? 700 : 500,
-                    backgroundColor: isActive ? "var(--btn-dark)" : "rgba(255, 255, 255, 0.6)",
+                    backgroundColor: isActive ? "var(--btn-dark)" : "rgba(255, 255, 255, 0.75)",
                     color: isActive ? "#FFFFFF" : "var(--text-headline)",
-                    border: `1px solid ${isActive ? "var(--btn-dark)" : "var(--canvas-border)"}`,
-                    boxShadow: isActive ? "0 4px 12px rgba(36, 39, 53, 0.15)" : "none",
+                    border: `1.5px solid ${isActive ? "var(--btn-dark)" : "var(--canvas-border)"}`,
+                    boxShadow: isActive ? "0 4px 14px rgba(36, 39, 53, 0.16)" : "0 1px 3px rgba(0,0,0,0.02)",
                     cursor: "pointer",
-                    transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.45rem",
                   }}
                 >
-                  {tab.label} ({tab.count})
+                  <span>{tab.label}</span>
+                  <span
+                    style={{
+                      fontSize: "0.7rem",
+                      fontWeight: 700,
+                      padding: "0.1rem 0.45rem",
+                      borderRadius: "9999px",
+                      backgroundColor: isActive ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.06)",
+                      color: isActive ? "#FFFFFF" : "var(--text-muted)",
+                    }}
+                  >
+                    {tab.count}
+                  </span>
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Projects Cards Grid */}
+        {/* Project Cards Grid */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(380px, 1fr))",
+            gridTemplateColumns: "1fr",
             gap: "2rem",
           }}
         >
@@ -220,222 +268,261 @@ export default function WorkSection() {
                 className="interactive-card"
                 style={{
                   backgroundColor: "#FFFFFF",
-                  borderRadius: "18px",
-                  border: "1px solid var(--canvas-border)",
-                  padding: "2rem",
-                  boxShadow: "0 10px 28px -8px rgba(46, 52, 68, 0.06)",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  position: "relative",
-                  transition: "all 0.25s ease",
+                  borderRadius: "20px",
+                  border: "1.5px solid var(--canvas-border)",
+                  borderTop: `4px solid ${project.color}`,
+                  overflow: "hidden",
+                  boxShadow: "0 10px 30px -8px rgba(36, 39, 53, 0.06)",
                 }}
               >
-                <div>
-                  {/* Category Pill and Metrics Pill */}
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      marginBottom: "1rem",
-                    }}
-                  >
+                {/* Browser-Chrome Style Header Bar */}
+                <div
+                  style={{
+                    backgroundColor: "#FAF9F5",
+                    borderBottom: "1px solid #ECE7D9",
+                    padding: "0.85rem 1.75rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                    gap: "0.75rem",
+                  }}
+                >
+                  {/* Traffic light dots + slug */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                    <div style={{ display: "flex", gap: "6px" }}>
+                      <span style={{ width: "9px", height: "9px", borderRadius: "50%", backgroundColor: "#EF4444" }} />
+                      <span style={{ width: "9px", height: "9px", borderRadius: "50%", backgroundColor: "#F59E0B" }} />
+                      <span style={{ width: "9px", height: "9px", borderRadius: "50%", backgroundColor: "#10B981" }} />
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.4rem",
+                        backgroundColor: "#FFFFFF",
+                        padding: "0.22rem 0.75rem",
+                        borderRadius: "9999px",
+                        border: "1px solid #E5E1D7",
+                        fontSize: "0.74rem",
+                        color: "var(--text-muted)",
+                        fontFamily: "monospace",
+                      }}
+                    >
+                      <Globe size={12} color="#9CA3AF" />
+                      <span>https://{project.slug}</span>
+                    </div>
+                  </div>
+
+                  {/* Category Pill & Metrics */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
                     <span
                       style={{
                         fontSize: "0.72rem",
                         fontWeight: 700,
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        padding: "0.3rem 0.65rem",
+                        padding: "0.2rem 0.65rem",
                         borderRadius: "9999px",
-                        backgroundColor: "#FAF9F5",
-                        color: "var(--text-headline)",
-                        border: "1px solid var(--canvas-border)",
+                        backgroundColor: `${project.color}14`,
+                        color: project.color,
+                        letterSpacing: "0.03em",
                       }}
                     >
                       {project.categoryLabel}
                     </span>
-
-                    {project.featured && (
-                      <span
-                        style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: "0.3rem",
-                          fontSize: "0.68rem",
-                          fontWeight: 700,
-                          color: "#D97706",
-                          backgroundColor: "#FEF3C7",
-                          padding: "0.22rem 0.55rem",
-                          borderRadius: "9999px",
-                        }}
-                      >
-                        <Sparkles size={11} />
-                        FEATURED
-                      </span>
-                    )}
+                    <span
+                      style={{
+                        fontSize: "0.74rem",
+                        fontWeight: 700,
+                        padding: "0.2rem 0.65rem",
+                        borderRadius: "9999px",
+                        backgroundColor: "#FAF3E0",
+                        color: "#92400E",
+                        border: "1px solid #FDE68A",
+                      }}
+                    >
+                      {project.metrics}
+                    </span>
                   </div>
+                </div>
 
-                  {/* Title & Tagline */}
-                  <h3
+                {/* Card Main Body */}
+                <div style={{ padding: "clamp(1.75rem, 3vw, 2.5rem)" }}>
+                  <div
                     style={{
-                      fontSize: "1.45rem",
-                      fontWeight: 800,
-                      color: "var(--text-headline)",
-                      lineHeight: 1.2,
-                      margin: "0 0 0.4rem 0",
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "0.88rem",
-                      fontWeight: 600,
-                      color: "#4A5568",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "flex-start",
+                      flexWrap: "wrap",
+                      gap: "1.25rem",
                       marginBottom: "1rem",
                     }}
                   >
-                    {project.tagline}
-                  </p>
+                    <div>
+                      <h3
+                        style={{
+                          fontSize: "clamp(1.4rem, 2.4vw, 1.9rem)",
+                          fontWeight: 800,
+                          color: "var(--text-headline)",
+                          margin: "0 0 0.35rem 0",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {project.title}
+                      </h3>
+                      <p
+                        style={{
+                          fontSize: "0.98rem",
+                          fontWeight: 600,
+                          color: project.color,
+                          margin: 0,
+                        }}
+                      >
+                        {project.tagline}
+                      </p>
+                    </div>
 
-                  {/* Description */}
+                    {/* External links */}
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="pill-chip"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "0.45rem",
+                          padding: "0.55rem 1.15rem",
+                          borderRadius: "9999px",
+                          backgroundColor: "#FAF9F5",
+                          border: "1px solid #ECE7D9",
+                          fontSize: "0.82rem",
+                          fontWeight: 600,
+                          color: "var(--text-headline)",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <GithubIcon size={15} />
+                        <span>Source</span>
+                        <ArrowUpRight size={13} />
+                      </a>
+
+                      <button
+                        onClick={() => toggleExpand(project.id)}
+                        className="pill-chip"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "0.4rem",
+                          padding: "0.55rem 1.15rem",
+                          borderRadius: "9999px",
+                          backgroundColor: isExpanded ? "var(--btn-dark)" : "#FFFFFF",
+                          border: `1.5px solid ${isExpanded ? "var(--btn-dark)" : "var(--canvas-border)"}`,
+                          color: isExpanded ? "#FFFFFF" : "var(--text-headline)",
+                          fontSize: "0.82rem",
+                          fontWeight: 600,
+                          cursor: "pointer",
+                        }}
+                      >
+                        <span>{isExpanded ? "Hide Blueprint" : "Inspect Architecture"}</span>
+                        {isExpanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
+                      </button>
+                    </div>
+                  </div>
+
                   <p
                     style={{
-                      fontSize: "0.92rem",
-                      lineHeight: 1.65,
-                      color: "var(--text-muted)",
-                      marginBottom: "1.25rem",
+                      fontSize: "0.95rem",
+                      color: "#4A5568",
+                      lineHeight: 1.6,
+                      margin: "0 0 1.5rem 0",
+                      maxWidth: "1050px",
                     }}
                   >
                     {project.desc}
                   </p>
 
-                  {/* Key Metric Badge */}
-                  <div
-                    style={{
-                      backgroundColor: "#FAF9F5",
-                      border: "1px solid #ECE7D9",
-                      padding: "0.6rem 0.9rem",
-                      borderRadius: "8px",
-                      marginBottom: "1.25rem",
-                      fontSize: "0.82rem",
-                      fontWeight: 700,
-                      color: "var(--text-headline)",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.5rem",
-                    }}
-                  >
-                    <Code2 size={15} color="#242735" />
-                    <span>{project.metrics}</span>
-                  </div>
-
-                  {/* Expandable Architecture Drawer */}
-                  <div style={{ marginBottom: "1.5rem" }}>
-                    <button
-                      onClick={() => toggleExpand(project.id)}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.4rem",
-                        fontSize: "0.82rem",
-                        fontWeight: 700,
-                        color: "var(--text-headline)",
-                        cursor: "pointer",
-                        padding: "0.4rem 0",
-                      }}
-                    >
-                      <span>{isExpanded ? "Hide Architecture Highlights" : "View Architecture Highlights"}</span>
-                      {isExpanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
-                    </button>
-
-                    {isExpanded && (
-                      <div
-                        style={{
-                          marginTop: "0.6rem",
-                          padding: "0.9rem 1rem",
-                          backgroundColor: "#FAF9F5",
-                          borderRadius: "10px",
-                          border: "1px solid #ECE7D9",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "0.55rem",
-                        }}
-                      >
-                        {project.architecture.map((item, i) => (
-                          <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem" }}>
-                            <div style={{ width: "4px", height: "4px", borderRadius: "50%", backgroundColor: "#242735", marginTop: "0.45rem", flexShrink: 0 }} />
-                            <span style={{ fontSize: "0.82rem", color: "#474D5E", lineHeight: 1.5 }}>
-                              {item}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Bottom Row: Tech Tags & GitHub Link */}
-                <div
-                  style={{
-                    paddingTop: "1.25rem",
-                    borderTop: "1px solid var(--canvas-border)",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                    gap: "0.75rem",
-                  }}
-                >
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
+                  {/* Tech stack badges */}
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginBottom: isExpanded ? "1.75rem" : 0 }}>
                     {project.tech.map((t) => (
                       <span
                         key={t}
+                        className="pill-chip"
                         style={{
-                          fontSize: "0.74rem",
-                          padding: "0.22rem 0.55rem",
-                          borderRadius: "4px",
-                          backgroundColor: "var(--canvas-bg)",
-                          color: "var(--text-headline)",
-                          fontWeight: 500,
+                          fontSize: "0.78rem",
+                          fontWeight: 600,
+                          padding: "0.3rem 0.75rem",
+                          borderRadius: "9999px",
+                          backgroundColor: t === "Angular" ? "#FFF5F5" : "#FAF9F5",
+                          color: t === "Angular" ? "#C53030" : "var(--text-headline)",
+                          border: t === "Angular" ? "1px solid #FEB2B2" : "1px solid #ECE7D9",
                         }}
                       >
-                        {t}
+                        {t === "Angular" ? "⭐ Angular" : t}
                       </span>
                     ))}
                   </div>
 
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "0.4rem",
-                      fontSize: "0.82rem",
-                      fontWeight: 700,
-                      color: "var(--text-headline)",
-                      padding: "0.45rem 0.85rem",
-                      borderRadius: "9999px",
-                      backgroundColor: "rgba(36, 39, 53, 0.06)",
-                      transition: "all 0.2s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "var(--btn-dark)";
-                      e.currentTarget.style.color = "#FFFFFF";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "rgba(36, 39, 53, 0.06)";
-                      e.currentTarget.style.color = "var(--text-headline)";
-                    }}
-                  >
-                    <GithubIcon size={14} />
-                    <span>GitHub</span>
-                    <ArrowUpRight size={13} />
-                  </a>
+                  {/* Expandable Technical Decisions / Architecture Drawer */}
+                  {isExpanded && (
+                    <div
+                      style={{
+                        backgroundColor: "#FAF9F5",
+                        borderRadius: "14px",
+                        border: "1px solid #ECE7D9",
+                        padding: "1.6rem 1.75rem",
+                        marginTop: "1.25rem",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}>
+                        <Terminal size={17} color={project.color} />
+                        <span
+                          style={{
+                            fontSize: "0.78rem",
+                            fontWeight: 700,
+                            letterSpacing: "0.08em",
+                            textTransform: "uppercase",
+                            color: "var(--text-headline)",
+                          }}
+                        >
+                          Technical Architecture &amp; Key Solutions
+                        </span>
+                      </div>
+
+                      <div
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                          gap: "1rem",
+                        }}
+                      >
+                        {project.architecture.map((item, i) => (
+                          <div
+                            key={i}
+                            style={{
+                              display: "flex",
+                              alignItems: "flex-start",
+                              gap: "0.65rem",
+                              backgroundColor: "#FFFFFF",
+                              padding: "0.95rem 1.15rem",
+                              borderRadius: "10px",
+                              border: "1px solid #ECE7D9",
+                              fontSize: "0.86rem",
+                              color: "#374151",
+                              lineHeight: 1.5,
+                            }}
+                          >
+                            <CheckCircle2
+                              size={16}
+                              color={project.color}
+                              style={{ flexShrink: 0, marginTop: "0.15rem" }}
+                            />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             );

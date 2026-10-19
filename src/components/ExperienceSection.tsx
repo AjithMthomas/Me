@@ -1,7 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { Briefcase, Calendar, MapPin, CheckCircle, ArrowRight, TrendingUp } from "lucide-react";
+import {
+  Briefcase,
+  Calendar,
+  MapPin,
+  CheckCircle2,
+  ArrowRight,
+  TrendingUp,
+  Building2,
+  Sparkles,
+  ExternalLink,
+  Layers,
+  Award,
+} from "lucide-react";
 
 export default function ExperienceSection() {
   const [activeCompanyIndex, setActiveCompanyIndex] = useState(0);
@@ -9,15 +21,17 @@ export default function ExperienceSection() {
   const experiences = [
     {
       company: "Neeraali Digital Marketing",
+      shortName: "Neeraali",
       role: "Full Stack Developer",
       period: "July 2025 – August 2026",
       location: "Bengaluru, India",
       type: "Full-Time",
+      badgeColor: "#2563EB",
       tagline: "Architected end-to-end full stack web platforms and scalable client architectures.",
       metrics: [
-        { label: "Delivered", value: "6+ Apps" },
-        { label: "Lifecycle", value: "End-to-End" },
-        { label: "Stack", value: "Node, Django, Angular" },
+        { label: "Delivered", value: "6+ Apps", detail: "End-to-end production delivery" },
+        { label: "Architecture", value: "Full Stack", detail: "Angular, Django, Node.js" },
+        { label: "Deployment", value: "Cloud CI/CD", detail: "Automated pipelines & testing" },
       ],
       description: [
         "Architected and successfully delivered 6+ full-stack production web applications, managing the complete engineering lifecycle from system design to cloud release.",
@@ -25,19 +39,21 @@ export default function ExperienceSection() {
         "Significantly reduced client time-to-market by standardizing RESTful API conventions, streamlining CI/CD workflows, and enforcing automated validation best practices.",
         "Collaborated with UI/UX designers and stakeholders to implement intuitive, accessible user interfaces and reliable state management.",
       ],
-      skills: ["Node.js", "Python / Django", "Angular", "JavaScript", "Full Stack Architecture", "API Integration", "Agile Execution"],
+      skills: ["Angular", "Python", "Django", "Node.js", "JavaScript (ES6+)", "RESTful APIs", "Full Stack Architecture", "Agile Execution"],
     },
     {
       company: "Anvenssa AI Consulting",
+      shortName: "Anvenssa AI",
       role: "Senior Software Developer",
       period: "January 2026 – February 2026",
       location: "Remote",
       type: "Contract",
-      tagline: "Customized Full Stack consulting and rapid milestone delivery on Time & Material basis.",
+      badgeColor: "#7C3AED",
+      tagline: "Specialized Full Stack development and rapid milestone execution on Time & Material basis.",
       metrics: [
-        { label: "Model", value: "T&M Basis" },
-        { label: "Delivery", value: "100% On-Time" },
-        { label: "Focus", value: "Full Stack Architecture" },
+        { label: "Engagement", value: "T&M Basis", detail: "Specialized advisory & build" },
+        { label: "Milestones", value: "100%", detail: "Delivered on schedule" },
+        { label: "Scope", value: "Full Stack", detail: "Client-facing software systems" },
       ],
       description: [
         "Provided specialized, high-tempo Full Stack development consulting services on a Time and Material basis.",
@@ -45,19 +61,21 @@ export default function ExperienceSection() {
         "Engineered reliable backend endpoints and integrated dynamic frontend components for client-facing software systems.",
         "Conducted code reviews, performance optimizations, and debugging for complex production issues.",
       ],
-      skills: ["Full Stack Consulting", "Remote Execution", "Sprint Milestones", "Time & Material", "Rapid Prototyping"],
+      skills: ["Full Stack Consulting", "Remote Execution", "Sprint Milestones", "Time & Material", "Rapid Prototyping", "Code Auditing"],
     },
     {
       company: "Zil Money (MNC)",
+      shortName: "Zil Money",
       role: "Software Engineer",
       period: "September 2023 – October 2024",
       location: "India",
       type: "Full-Time",
+      badgeColor: "#059669",
       tagline: "Led core fintech engineering for 1M+ active banking users and custom ML fraud prevention.",
       metrics: [
-        { label: "User Base", value: "1M+ Users" },
-        { label: "Core Projects", value: "2 Enterprise" },
-        { label: "Infra", value: "Docker & K8s" },
+        { label: "User Base", value: "1M+ Users", detail: "Commercial banking scale" },
+        { label: "Core Products", value: "2 Flagships", detail: "Restaurant App & ML Fraud System" },
+        { label: "Infrastructure", value: "Docker & K8s", detail: "High-concurrency microservices" },
       ],
       description: [
         "Led engineering on two flagship company products: a high-throughput Restaurant Management App and an intelligent Fraud Detection ML System.",
@@ -65,7 +83,7 @@ export default function ExperienceSection() {
         "Engineered real-time anomaly detection pipelines that intercepted suspicious financial transactions with high precision.",
         "Collaborated closely with cross-functional product teams, security auditors, and banking partners to ensure regulatory compliance and 99.9% availability.",
       ],
-      skills: ["FastAPI", "Django", "Node.js", "Angular", "Kubernetes", "Docker", "Fintech Systems", "Machine Learning"],
+      skills: ["Angular", "FastAPI", "Django", "Node.js", "Kubernetes", "Docker", "Machine Learning", "Fintech Systems"],
     },
   ];
 
@@ -75,7 +93,7 @@ export default function ExperienceSection() {
     <section
       id="experience"
       style={{
-        padding: "7rem clamp(2rem, 4.5vw, 4.5rem)",
+        padding: "7.5rem clamp(2rem, 4.5vw, 4.5rem)",
         backgroundColor: "var(--canvas-bg)",
         borderTop: "1px solid var(--canvas-border)",
         position: "relative",
@@ -85,19 +103,27 @@ export default function ExperienceSection() {
       <div style={{ maxWidth: "1340px", margin: "0 auto" }}>
         {/* Section Header */}
         <div style={{ marginBottom: "3.5rem" }}>
-          <span
-            style={{
-              fontSize: "0.82rem",
-              fontWeight: 700,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "var(--text-muted)",
-              display: "block",
-              marginBottom: "0.8rem",
-            }}
-          >
-            03 —— CAREER TRAJECTORY
-          </span>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.8rem" }}>
+            <span
+              style={{
+                fontSize: "0.8rem",
+                fontWeight: 700,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "var(--text-muted)",
+              }}
+            >
+              03 —— CAREER TRAJECTORY
+            </span>
+            <span
+              style={{
+                width: "6px",
+                height: "6px",
+                borderRadius: "50%",
+                backgroundColor: "#242735",
+              }}
+            />
+          </div>
           <h2
             style={{
               fontSize: "clamp(2.4rem, 4vw, 3.8rem)",
@@ -105,6 +131,7 @@ export default function ExperienceSection() {
               color: "var(--text-headline)",
               lineHeight: 1.12,
               letterSpacing: "-0.03em",
+              margin: 0,
             }}
           >
             Professional Experience
@@ -114,29 +141,30 @@ export default function ExperienceSection() {
               fontSize: "1.05rem",
               color: "var(--text-muted)",
               marginTop: "0.8rem",
-              maxWidth: "600px",
+              maxWidth: "620px",
+              lineHeight: 1.5,
             }}
           >
-            Proven track record delivering commercial fintech applications, scalable SaaS systems, and cloud infrastructure.
+            Proven commercial track record delivering enterprise fintech applications, SaaS platforms, and cloud infrastructure.
           </p>
         </div>
 
-        {/* Interactive Experience Layout: Tabs + Active Showcase */}
+        {/* 2-Column Experience Layout */}
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "minmax(280px, 1fr) 2.2fr",
-            gap: "clamp(2rem, 3.5vw, 4rem)",
+            gap: "clamp(2rem, 3.5vw, 3.5rem)",
             alignItems: "start",
           }}
           className="about-grid-container"
         >
-          {/* Company Switcher Tabs */}
+          {/* Company Switcher Timeline Column */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "0.75rem",
+              gap: "0.85rem",
             }}
           >
             {experiences.map((exp, idx) => {
@@ -147,14 +175,15 @@ export default function ExperienceSection() {
                   onClick={() => setActiveCompanyIndex(idx)}
                   className="interactive-card"
                   style={{
-                    padding: "1.35rem 1.4rem",
-                    borderRadius: "14px",
-                    backgroundColor: isActive ? "#FFFFFF" : "rgba(255, 255, 255, 0.6)",
+                    padding: "1.45rem 1.4rem",
+                    borderRadius: "16px",
+                    backgroundColor: isActive ? "#FFFFFF" : "rgba(255, 255, 255, 0.75)",
                     border: `1.5px solid ${isActive ? "var(--text-headline)" : "var(--canvas-border)"}`,
+                    borderLeft: `4px solid ${isActive ? exp.badgeColor : "transparent"}`,
                     cursor: "pointer",
                     boxShadow: isActive
                       ? "0 10px 24px -6px rgba(36, 39, 53, 0.12)"
-                      : "0 2px 4px rgba(0,0,0,0.02)",
+                      : "0 2px 6px rgba(0, 0, 0, 0.02)",
                     transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
                     display: "flex",
                     justifyContent: "space-between",
@@ -162,30 +191,50 @@ export default function ExperienceSection() {
                   }}
                 >
                   <div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.3rem" }}>
+                      <span
+                        style={{
+                          fontSize: "0.68rem",
+                          fontWeight: 700,
+                          padding: "0.15rem 0.5rem",
+                          borderRadius: "4px",
+                          backgroundColor: `${exp.badgeColor}12`,
+                          color: exp.badgeColor,
+                        }}
+                      >
+                        {exp.type}
+                      </span>
+                      <span style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
+                        {exp.location}
+                      </span>
+                    </div>
+
                     <h3
                       style={{
-                        fontSize: "1.05rem",
-                        fontWeight: isActive ? 800 : 600,
+                        fontSize: "1.08rem",
+                        fontWeight: isActive ? 800 : 700,
                         color: "var(--text-headline)",
                         margin: 0,
                       }}
                     >
                       {exp.company}
                     </h3>
+
                     <span
                       style={{
-                        fontSize: "0.82rem",
+                        fontSize: "0.84rem",
                         color: isActive ? "var(--text-headline)" : "var(--text-muted)",
-                        fontWeight: 500,
+                        fontWeight: 600,
                         marginTop: "0.25rem",
                         display: "block",
                       }}
                     >
                       {exp.role}
                     </span>
+
                     <span
                       style={{
-                        fontSize: "0.75rem",
+                        fontSize: "0.74rem",
                         color: "var(--text-muted)",
                         marginTop: "0.35rem",
                         display: "block",
@@ -196,11 +245,12 @@ export default function ExperienceSection() {
                   </div>
 
                   <ArrowRight
-                    size={16}
+                    size={17}
                     color={isActive ? "#242735" : "#A2A098"}
                     style={{
-                      transform: isActive ? "translateX(4px)" : "translateX(0)",
+                      transform: isActive ? "translateX(4px)" : "none",
                       transition: "transform 0.2s ease",
+                      flexShrink: 0,
                     }}
                   />
                 </div>
@@ -208,48 +258,47 @@ export default function ExperienceSection() {
             })}
           </div>
 
-          {/* Active Experience Showcase Card */}
+          {/* Active Company Deep-Dive Showcase */}
           <div
+            className="interactive-card"
             style={{
+              padding: "clamp(2rem, 3.5vw, 2.75rem)",
+              borderRadius: "20px",
               backgroundColor: "#FFFFFF",
-              borderRadius: "18px",
-              border: "1px solid var(--canvas-border)",
-              padding: "clamp(1.75rem, 3vw, 2.5rem)",
-              boxShadow: "0 16px 36px -10px rgba(46, 52, 68, 0.08)",
-              position: "relative",
-              overflow: "hidden",
+              border: "1.5px solid var(--canvas-border)",
+              boxShadow: "0 16px 36px -10px rgba(36, 39, 53, 0.08)",
             }}
           >
-            {/* Top Details Strip */}
+            {/* Top Detail Header */}
             <div
               style={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "flex-start",
                 flexWrap: "wrap",
-                gap: "1rem",
-                paddingBottom: "1.5rem",
-                borderBottom: "1px solid var(--canvas-border)",
+                gap: "1.25rem",
+                borderBottom: "1px solid #ECE7D9",
+                paddingBottom: "1.75rem",
                 marginBottom: "1.75rem",
               }}
             >
               <div>
-                <span
-                  style={{
-                    fontSize: "0.72rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.12em",
-                    textTransform: "uppercase",
-                    color: "var(--text-muted)",
-                    display: "block",
-                    marginBottom: "0.3rem",
-                  }}
-                >
-                  {currentExp.type} Position
-                </span>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.4rem" }}>
+                  <Building2 size={18} color={currentExp.badgeColor} />
+                  <span
+                    style={{
+                      fontSize: "0.82rem",
+                      fontWeight: 700,
+                      color: currentExp.badgeColor,
+                      letterSpacing: "0.04em",
+                    }}
+                  >
+                    {currentExp.type} Role
+                  </span>
+                </div>
                 <h3
                   style={{
-                    fontSize: "clamp(1.5rem, 2.4vw, 1.95rem)",
+                    fontSize: "clamp(1.5rem, 2.5vw, 1.85rem)",
                     fontWeight: 800,
                     color: "var(--text-headline)",
                     margin: 0,
@@ -260,133 +309,181 @@ export default function ExperienceSection() {
                 </h3>
                 <span
                   style={{
-                    fontSize: "1.08rem",
+                    fontSize: "1.05rem",
                     fontWeight: 600,
                     color: "#4A5568",
-                    marginTop: "0.25rem",
+                    marginTop: "0.35rem",
                     display: "block",
                   }}
                 >
-                  @ {currentExp.company}
+                  {currentExp.company}
                 </span>
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.4rem" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", color: "var(--text-muted)", fontSize: "0.85rem" }}>
-                  <Calendar size={14} />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                  gap: "0.35rem",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", fontSize: "0.82rem", color: "var(--text-muted)", fontWeight: 500 }}>
+                  <Calendar size={15} />
                   <span>{currentExp.period}</span>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", color: "var(--text-muted)", fontSize: "0.85rem" }}>
-                  <MapPin size={14} />
+                <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", fontSize: "0.82rem", color: "var(--text-muted)", fontWeight: 500 }}>
+                  <MapPin size={15} />
                   <span>{currentExp.location}</span>
                 </div>
               </div>
             </div>
 
-            {/* Impact Metrics Banner */}
+            {/* Tagline */}
+            <p
+              style={{
+                fontSize: "1rem",
+                fontWeight: 600,
+                color: "var(--text-headline)",
+                lineHeight: 1.5,
+                margin: "0 0 1.5rem 0",
+              }}
+            >
+              {currentExp.tagline}
+            </p>
+
+            {/* Metrics Ribbon */}
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
                 gap: "1rem",
-                backgroundColor: "#FAF9F5",
-                borderRadius: "12px",
-                padding: "1rem 1.25rem",
-                border: "1px solid #ECE7D9",
-                marginBottom: "1.75rem",
+                marginBottom: "2rem",
               }}
             >
-              {currentExp.metrics.map((m) => (
-                <div key={m.label}>
-                  <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", display: "block" }}>
-                    {m.label}
+              {currentExp.metrics.map((metric, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: "1rem 1.15rem",
+                    borderRadius: "12px",
+                    backgroundColor: "#FAF9F5",
+                    border: "1px solid #ECE7D9",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "0.72rem",
+                      fontWeight: 600,
+                      color: "var(--text-muted)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.06em",
+                      display: "block",
+                      marginBottom: "0.25rem",
+                    }}
+                  >
+                    {metric.label}
                   </span>
-                  <span style={{ fontSize: "1.15rem", fontWeight: 800, color: "var(--text-headline)" }}>
-                    {m.value}
+                  <span
+                    style={{
+                      fontSize: "1.3rem",
+                      fontWeight: 800,
+                      color: "var(--text-headline)",
+                      display: "block",
+                      lineHeight: 1.1,
+                      marginBottom: "0.2rem",
+                    }}
+                  >
+                    {metric.value}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "0.74rem",
+                      color: "#6B7280",
+                      display: "block",
+                    }}
+                  >
+                    {metric.detail}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* Accomplishment Bullets */}
+            {/* Key Accomplishments Checklist */}
             <div style={{ marginBottom: "2rem" }}>
-              <h4
+              <span
                 style={{
-                  fontSize: "0.82rem",
+                  fontSize: "0.75rem",
                   fontWeight: 700,
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
                   color: "var(--text-muted)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  display: "block",
                   marginBottom: "1rem",
                 }}
               >
                 Key Responsibilities &amp; Impact
-              </h4>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-                {currentExp.description.map((bullet, idx) => (
-                  <div
-                    key={idx}
+              </span>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+                {currentExp.description.map((point, i) => (
+                  <li
+                    key={i}
                     style={{
                       display: "flex",
                       alignItems: "flex-start",
                       gap: "0.75rem",
+                      fontSize: "0.92rem",
+                      color: "#374151",
+                      lineHeight: 1.55,
                     }}
                   >
-                    <div
-                      style={{
-                        marginTop: "0.3rem",
-                        width: "6px",
-                        height: "6px",
-                        borderRadius: "50%",
-                        backgroundColor: "#242735",
-                        flexShrink: 0,
-                      }}
+                    <CheckCircle2
+                      size={17}
+                      color="#059669"
+                      style={{ flexShrink: 0, marginTop: "0.2rem" }}
                     />
-                    <p
-                      style={{
-                        fontSize: "0.96rem",
-                        lineHeight: 1.65,
-                        color: "#3F4555",
-                        margin: 0,
-                      }}
-                    >
-                      {bullet}
-                    </p>
-                  </div>
+                    <span>{point}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
-            {/* Tech Stack Employed */}
-            <div>
+            {/* Technologies Applied */}
+            <div
+              style={{
+                borderTop: "1px solid #ECE7D9",
+                paddingTop: "1.5rem",
+              }}
+            >
               <span
                 style={{
-                  fontSize: "0.78rem",
+                  fontSize: "0.75rem",
                   fontWeight: 700,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
                   color: "var(--text-muted)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
                   display: "block",
-                  marginBottom: "0.6rem",
+                  marginBottom: "0.75rem",
                 }}
               >
-                Technologies Employed
+                Technologies Applied
               </span>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem" }}>
                 {currentExp.skills.map((skill) => (
                   <span
                     key={skill}
+                    className="pill-chip"
                     style={{
                       fontSize: "0.78rem",
                       fontWeight: 600,
                       padding: "0.3rem 0.75rem",
                       borderRadius: "9999px",
-                      backgroundColor: "var(--canvas-bg)",
-                      color: "var(--text-headline)",
-                      border: "1px solid var(--canvas-border)",
+                      backgroundColor: skill === "Angular" ? "#FFF5F5" : "#FAF9F5",
+                      color: skill === "Angular" ? "#C53030" : "var(--text-headline)",
+                      border: skill === "Angular" ? "1px solid #FEB2B2" : "1px solid #E5E1D7",
                     }}
                   >
-                    {skill}
+                    {skill === "Angular" ? "⭐ Angular" : skill}
                   </span>
                 ))}
               </div>

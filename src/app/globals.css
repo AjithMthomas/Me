@@ -150,6 +150,36 @@ button {
   }
 }
 
+/* Card interactive elevation and micro-interactions */
+.interactive-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease;
+}
+.interactive-card:hover {
+  transform: translateY(-3px);
+}
+
+.subtle-pulse {
+  animation: beaconPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes beaconPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.18);
+  }
+}
+
+.pill-chip {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pill-chip:hover {
+  transform: translateY(-1px);
+}
+
 /* ========================================================
    HERO & HOME SCREEN RESPONSIVE SYSTEM
    ======================================================== */

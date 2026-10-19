@@ -1,27 +1,43 @@
 "use client";
 
 import React from "react";
-import { GraduationCap, Code, Award, CheckCircle } from "lucide-react";
+import { GraduationCap, Code, Award, CheckCircle2, BookOpen, Sparkles, Building } from "lucide-react";
 
 export default function EducationSection() {
   const education = [
     {
-      icon: <Code size={22} color="#242735" />,
-      period: "2022 — 2023",
-      degree: "Full Stack Architecture (Python Django + React)",
-      institution: "Brototype",
-      badge: "Industry Specialization",
-      desc: "Rigorous, project-driven software engineering boot camp focusing on end-to-end full stack web architecture, data structures, REST API development, and real-world system delivery using Python, Django, and React.",
-      skills: ["Python", "Django REST Framework", "React.js", "PostgreSQL", "Full Stack Lifecycles"],
-    },
-    {
-      icon: <GraduationCap size={22} color="#242735" />,
+      icon: <GraduationCap size={24} color="#242735" />,
       period: "2019 — 2021",
       degree: "Bachelor of Computer Application (BCA)",
-      institution: "SJB College of Management Studies · Bangalore University",
-      badge: "Graduated",
-      desc: "Comprehensive undergraduate degree in computer applications from Bangalore University, covering software engineering principles, algorithms, data structures, relational database management systems, and web technologies.",
-      skills: ["Computer Science Fundamentals", "Data Structures", "RDBMS & SQL", "Software Engineering"],
+      institution: "Bangalore University",
+      college: "SJB College of Management Studies",
+      badge: "Graduated Degree",
+      badgeColor: "#2563EB",
+      focus: "Software Engineering & Computer Applications",
+      desc: "Comprehensive undergraduate degree in computer applications covering core software engineering principles, algorithms, data structures, relational database management systems, and modern web application programming.",
+      coursework: [
+        "Data Structures & Algorithm Design",
+        "Relational Database Management (RDBMS & SQL)",
+        "Software Engineering Lifecycles",
+        "Object-Oriented Programming & Web Technologies",
+      ],
+    },
+    {
+      icon: <Code size={24} color="#242735" />,
+      period: "2022 — 2023",
+      degree: "Full Stack Architecture Specialization",
+      institution: "Brototype",
+      college: "Intensive Engineering Bootcamp",
+      badge: "Industry Certified",
+      badgeColor: "#059669",
+      focus: "Production Python, Django & React Systems",
+      desc: "High-intensity, project-driven software engineering boot camp focusing on end-to-end full stack web architecture, data structures, REST API development, and real-world system delivery using Python, Django, and React.",
+      coursework: [
+        "Python & Django REST Framework APIs",
+        "React.js Single-Page Applications",
+        "PostgreSQL Schemas & ACID Optimization",
+        "Full-Lifecycle Production Deployments",
+      ],
     },
   ];
 
@@ -29,7 +45,7 @@ export default function EducationSection() {
     <section
       id="education"
       style={{
-        padding: "7rem clamp(2rem, 4.5vw, 4.5rem)",
+        padding: "7.5rem clamp(2rem, 4.5vw, 4.5rem)",
         backgroundColor: "var(--canvas-bg)",
         borderTop: "1px solid var(--canvas-border)",
         position: "relative",
@@ -39,19 +55,27 @@ export default function EducationSection() {
       <div style={{ maxWidth: "1340px", margin: "0 auto" }}>
         {/* Section Header */}
         <div style={{ marginBottom: "3.5rem" }}>
-          <span
-            style={{
-              fontSize: "0.82rem",
-              fontWeight: 700,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "var(--text-muted)",
-              display: "block",
-              marginBottom: "0.8rem",
-            }}
-          >
-            06 —— ACADEMIC FOUNDATION
-          </span>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.8rem" }}>
+            <span
+              style={{
+                fontSize: "0.8rem",
+                fontWeight: 700,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "var(--text-muted)",
+              }}
+            >
+              05 —— ACADEMIC FOUNDATION
+            </span>
+            <span
+              style={{
+                width: "6px",
+                height: "6px",
+                borderRadius: "50%",
+                backgroundColor: "#059669",
+              }}
+            />
+          </div>
           <h2
             style={{
               fontSize: "clamp(2.4rem, 4vw, 3.8rem)",
@@ -59,19 +83,21 @@ export default function EducationSection() {
               color: "var(--text-headline)",
               lineHeight: 1.12,
               letterSpacing: "-0.03em",
+              margin: 0,
             }}
           >
-            Education &amp; Specialization
+            Education &amp; Credentials
           </h2>
           <p
             style={{
               fontSize: "1.05rem",
               color: "var(--text-muted)",
               marginTop: "0.8rem",
-              maxWidth: "600px",
+              maxWidth: "620px",
+              lineHeight: 1.5,
             }}
           >
-            Formal computer science degree augmented by high-intensity practical full-stack specialization.
+            Formal computer science degree from Bangalore University augmented by rigorous practical full-stack software architecture training.
           </p>
         </div>
 
@@ -89,31 +115,32 @@ export default function EducationSection() {
               className="interactive-card"
               style={{
                 backgroundColor: "#FFFFFF",
-                border: "1px solid var(--canvas-border)",
-                borderRadius: "18px",
-                padding: "2.4rem",
+                border: "1.5px solid var(--canvas-border)",
+                borderTop: `4px solid ${item.badgeColor}`,
+                borderRadius: "20px",
+                padding: "clamp(1.75rem, 3vw, 2.5rem)",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                boxShadow: "0 10px 24px -8px rgba(46, 52, 68, 0.05)",
+                boxShadow: "0 10px 30px -8px rgba(36, 39, 53, 0.06)",
               }}
             >
               <div>
+                {/* Card Top Row */}
                 <div
                   style={{
                     display: "flex",
-                    alignItems: "center",
                     justifyContent: "space-between",
-                    marginBottom: "1.4rem",
+                    alignItems: "center",
+                    marginBottom: "1.25rem",
                   }}
                 >
                   <div
                     style={{
-                      width: "46px",
-                      height: "46px",
+                      width: "44px",
+                      height: "44px",
                       borderRadius: "12px",
-                      backgroundColor: "#FAF9F5",
-                      border: "1px solid #ECE7D9",
+                      backgroundColor: `${item.badgeColor}12`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -121,98 +148,120 @@ export default function EducationSection() {
                   >
                     {item.icon}
                   </div>
-                  <span
-                    style={{
-                      fontSize: "0.82rem",
-                      fontWeight: 700,
-                      backgroundColor: "#FAF9F5",
-                      border: "1px solid var(--canvas-border)",
-                      color: "var(--text-headline)",
-                      padding: "0.28rem 0.75rem",
-                      borderRadius: "9999px",
-                    }}
-                  >
-                    {item.period}
-                  </span>
+
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                    <span
+                      style={{
+                        fontSize: "0.74rem",
+                        fontWeight: 700,
+                        padding: "0.22rem 0.65rem",
+                        borderRadius: "9999px",
+                        backgroundColor: `${item.badgeColor}12`,
+                        color: item.badgeColor,
+                        letterSpacing: "0.04em",
+                      }}
+                    >
+                      {item.badge}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "0.78rem",
+                        fontWeight: 600,
+                        color: "var(--text-muted)",
+                        padding: "0.22rem 0.65rem",
+                        borderRadius: "9999px",
+                        backgroundColor: "#FAF9F5",
+                        border: "1px solid #ECE7D9",
+                      }}
+                    >
+                      {item.period}
+                    </span>
+                  </div>
                 </div>
 
-                <div style={{ marginBottom: "0.4rem" }}>
-                  <span
-                    style={{
-                      fontSize: "0.68rem",
-                      fontWeight: 700,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "#2563EB",
-                      backgroundColor: "#EFF6FF",
-                      padding: "0.2rem 0.5rem",
-                      borderRadius: "4px",
-                      display: "inline-block",
-                      marginBottom: "0.6rem",
-                    }}
-                  >
-                    {item.badge}
-                  </span>
-                </div>
-
+                {/* Degree & Institution */}
                 <h3
                   style={{
                     fontSize: "1.35rem",
                     fontWeight: 800,
                     color: "var(--text-headline)",
-                    marginBottom: "0.35rem",
-                    lineHeight: 1.3,
+                    margin: "0 0 0.35rem 0",
+                    lineHeight: 1.25,
                   }}
                 >
                   {item.degree}
                 </h3>
-                <h4
+                <span
                   style={{
-                    fontSize: "0.98rem",
-                    fontWeight: 600,
-                    color: "#4A5568",
-                    marginBottom: "1rem",
+                    fontSize: "0.95rem",
+                    fontWeight: 700,
+                    color: item.badgeColor,
+                    display: "block",
+                    marginBottom: "0.15rem",
                   }}
                 >
                   {item.institution}
-                </h4>
+                </span>
+                <span
+                  style={{
+                    fontSize: "0.82rem",
+                    color: "var(--text-muted)",
+                    display: "block",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  {item.college}
+                </span>
+
                 <p
                   style={{
                     fontSize: "0.92rem",
-                    lineHeight: 1.65,
-                    color: "var(--text-muted)",
-                    marginBottom: "1.5rem",
+                    color: "#4A5568",
+                    lineHeight: 1.6,
+                    margin: "0 0 1.5rem 0",
                   }}
                 >
                   {item.desc}
                 </p>
               </div>
 
-              {/* Coursework & Skills Chips */}
+              {/* Core Coursework Badges */}
               <div
                 style={{
-                  paddingTop: "1.2rem",
-                  borderTop: "1px solid var(--canvas-border)",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "0.4rem",
+                  borderTop: "1px solid #ECE7D9",
+                  paddingTop: "1.25rem",
                 }}
               >
-                {item.skills.map((s) => (
-                  <span
-                    key={s}
-                    style={{
-                      fontSize: "0.75rem",
-                      padding: "0.22rem 0.55rem",
-                      borderRadius: "4px",
-                      backgroundColor: "var(--canvas-bg)",
-                      color: "var(--text-headline)",
-                      fontWeight: 500,
-                    }}
-                  >
-                    {s}
-                  </span>
-                ))}
+                <span
+                  style={{
+                    fontSize: "0.72rem",
+                    fontWeight: 700,
+                    color: "var(--text-muted)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    display: "block",
+                    marginBottom: "0.65rem",
+                  }}
+                >
+                  Core Coursework &amp; Mastery
+                </span>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                  {item.coursework.map((course, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.55rem",
+                        fontSize: "0.84rem",
+                        color: "#374151",
+                      }}
+                    >
+                      <CheckCircle2 size={15} color={item.badgeColor} style={{ flexShrink: 0 }} />
+                      <span>{course}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ))}
