@@ -293,10 +293,10 @@ export default function LanyardBadge() {
                 width: "142px",
                 height: "155px",
                 borderRadius: "14px",
-                border: "2px solid #242735",
+                border: "none",
                 overflow: "hidden",
                 position: "relative",
-                boxShadow: "0 6px 16px rgba(36, 39, 53, 0.12)",
+                boxShadow: "0 4px 14px rgba(0, 0, 0, 0.08)",
                 backgroundColor: "#F7F4E8",
               }}
             >
